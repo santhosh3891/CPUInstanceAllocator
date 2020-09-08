@@ -1,6 +1,8 @@
 package com.allocate;
 
+import java.util.Collections;
 import java.util.List;
+
 import com.allocate.model.CPUAllocation;
 
 /**
@@ -27,12 +29,9 @@ public class InstanceAllocator {
 	 */
 	public List<CPUAllocation> getCosts(int hours, int cpus, float price) {
 		List<CPUAllocation> cpuAllocationDetails = InstanceAllocatorCalculation.getCalculatedCPUAllocation(hours, cpus, price);
-		
-		//sort the list in ascending order based on the totalCost of each region
-		if (cpuAllocationDetails != null && !cpuAllocationDetails.isEmpty()) {
-			 cpuAllocationDetails.sort((CPUAllocation c1, CPUAllocation c2) -> c1.getTotalCost().compareTo(c2.getTotalCost()));
-		 }
-		
+		if (cpuAllocationDetails != null && cpuAllocationDetails.size() > 0) {
+			Collections.sort(cpuAllocationDetails);
+		}
 		return cpuAllocationDetails;
 	}
 }

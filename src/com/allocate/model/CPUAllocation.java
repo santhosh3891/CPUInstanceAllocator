@@ -7,7 +7,7 @@ import java.util.List;
  * @author Santhoshkumar.DS
  *
  */
-public class CPUAllocation  {
+public class CPUAllocation implements Comparable<CPUAllocation> {
 	
 	private String region;
 	private String totalCost;
@@ -30,5 +30,14 @@ public class CPUAllocation  {
 	}
 	public void setServers(List<CPUAllocationByServerType> servers) {
 		this.servers = servers;
+	}
+	@Override
+	public int compareTo(CPUAllocation cpuAllocation) {
+		Float price1 = Float.valueOf(cpuAllocation.getTotalCost().substring(1));
+		Float price2 = Float.valueOf(this.getTotalCost().substring(1));
+		if(price1 == price2)
+			return 0;
+		else
+			return price1 > price2 ? -1 : 1;
 	}
 }
